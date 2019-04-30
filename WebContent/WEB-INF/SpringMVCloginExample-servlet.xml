@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+
+<beans xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context" xmlns="http://www.springframework.org/schema/beans">
+
+<context:component-scan base-package="com.jcg.examples.controller"/>
+
+<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+
+<property value="/WEB-INF/jsp/" name="prefix"/>
+
+<property value=".jsp" name="suffix"/>
+
+</bean>
+<bean class="com.jcg.examples.delegate.LoginDelegate" id="loginDelegate">
+
+<property ref="userService" name="userService"/>
+
+</bean>
+<bean class="com.jcg.examples.service.UserServiceImpl" id="userService">
+
+<property ref="userDao" name="userDao"/>
+
+</bean>
+
+
+<bean class="com.jcg.examples.dao.UserDaoImpl" name="userDao">
+
+<property ref="dataSource" name="dataSource"/>
+
+</bean>
+
+
+<bean class="org.springframework.jdbc.datasource.DriverManagerDataSource" id="dataSource">
+
+<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+
+<property name="url" value="jdbc:mysql://localhost:3306/springdb"/>
+
+<property name="username" value="root"/>
+
+<property name="password" value="root"/>
+
+</bean>
+
+
+
+</beans>
